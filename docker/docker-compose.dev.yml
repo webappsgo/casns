@@ -1,0 +1,19 @@
+---
+services:
+  casns:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80"
+      - "443:443"
+      - "853:853"
+    volumes:
+      - './volumes/config:/config:z'
+      - './volumes/data:/data:z'
+    environment:
+      - MODE=development
+      - DEBUG=true
